@@ -12,7 +12,8 @@
     "clean": "rm -rf dist",
     "lint": "gts lint 'src/**/*.ts'",
     "fix": "gts fix 'src/**/*.ts'",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [],
   "author": "",
