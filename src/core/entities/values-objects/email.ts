@@ -1,15 +1,12 @@
 import {ValidationError} from '../../errors/validation';
-import {BaseValueObject} from './base';
+import {ValueObject} from './base';
 
-export class Email extends BaseValueObject {
-  public readonly value: string;
-
-  private readonly regexValidator: RegExp =
+export class Email extends ValueObject {
+  private readonly regexValidator =
     /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\]\\.,;:\s@\\"]+\.)+[^<>()[\]\\.,;:\s@\\"]{2,})$/i;
 
-  private constructor(email: string) {
+  private constructor(public readonly value: string) {
     super();
-    this.value = email;
     this.valitate();
   }
 
