@@ -2,6 +2,7 @@ import {IEncrypter} from '#core/contracts/protocols/encrypter';
 import {IUserRepository} from '#core/contracts/repositories/user';
 import {IBaseUseCase} from '#core/contracts/use-cases/base';
 import {User} from '#core/entities/user';
+import {ValidationError} from '#core/errors/validation';
 import {RegisterUserDTO} from '../dtos/user/register-user';
 
 export class RegisterUserUseCase
@@ -13,6 +14,9 @@ export class RegisterUserUseCase
   ) {}
 
   perform = async (args: RegisterUserDTO) => {
+    if (args.password !== args.passwordConfirmation)
+      throw new ValidationError('password or passwordConfirmation', '#');
+
     const user = User.create({
       username: args.username,
       email: args.email,

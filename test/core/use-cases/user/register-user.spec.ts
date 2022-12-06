@@ -33,4 +33,15 @@ describe(RegisterUserUseCase.name, () => {
       new ValidationError('email', '123#123.com')
     );
   });
+
+  it('should not register a user with confirmation password invalid', async () => {
+    const promise = useCase.perform({
+      ...userParams,
+      passwordConfirmation: '123',
+    });
+
+    await expect(promise).rejects.toThrowError(
+      new ValidationError('password or passwordConfirmation', '#')
+    );
+  });
 });
