@@ -5,16 +5,16 @@ export class Email extends ValueObject {
   private readonly regexValidator =
     /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@(([^<>()[\]\\.,;:\s@\\"]+\.)+[^<>()[\]\\.,;:\s@\\"]{2,})$/i;
 
-  private constructor(public readonly value: string) {
+  private constructor(public readonly value: string, shouldValidate: boolean) {
     super();
-    this.valitate();
+    if (shouldValidate) this.validate();
   }
 
-  static create(email: string) {
-    return new Email(email);
+  static create(email: string, shouldValidate = true) {
+    return new Email(email, shouldValidate);
   }
 
-  valitate(): void {
+  validate(): void {
     if (!this.regexValidator.test(this.value))
       throw new ValidationError('email', this.value);
   }
