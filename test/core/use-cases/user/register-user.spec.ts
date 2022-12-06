@@ -1,19 +1,23 @@
+import {IEncrypter} from '#core/contracts/protocols/encrypter';
 import {IUserRepository} from '#core/contracts/repositories/user';
 import {User} from '#core/entities/user';
 import {ValidationError} from '#core/errors/validation';
 import {RegisterUserUseCase} from '#core/use-cases/user/register-user';
-import {UserRepositoryInMemory} from '#infra/repositories/in-memory/user';
+import {EncrypterBCrypt} from '#data/protocols/bcrypt/encrypter';
+import {UserRepositoryInMemory} from '#data/repositories/in-memory/user';
 import {userParams} from '?test/mocks/user';
 
 describe(RegisterUserUseCase.name, () => {
   let db: User[];
   let repo: IUserRepository;
+  let encrypter: IEncrypter;
   let useCase: RegisterUserUseCase;
 
   beforeEach(() => {
     db = [];
     repo = new UserRepositoryInMemory(db);
-    useCase = new RegisterUserUseCase(repo);
+    encrypter = new EncrypterBCrypt();
+    useCase = new RegisterUserUseCase(repo, encrypter);
   });
 
   it('should register a user', async () => {

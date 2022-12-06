@@ -14,13 +14,13 @@ describe(User.name, () => {
 
     expect(user).toHaveProperty(
       'username',
-      Username.create(userParams.username)
+      Username.create(userParams.username).value
     );
   });
 
   it('should have an email', () => {
     const user = User.create(userParams);
 
-    expect(user).toHaveProperty('email', Email.create(userParams.email));
+    expect(user).toHaveProperty('email', Email.create(userParams.email).value);
   });
 });
