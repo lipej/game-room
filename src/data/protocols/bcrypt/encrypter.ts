@@ -2,7 +2,7 @@ import {IEncrypter} from '#core/contracts/protocols/encrypter';
 import * as bcrypt from 'bcrypt';
 
 export class EncrypterBCrypt implements IEncrypter {
-  private readonly salt: number = 10;
+  private readonly salt: number = Number(<string>process.env.BCRYPT_SALT);
 
   encrypt = async (password: string): Promise<string> =>
     await bcrypt.hash(password, this.salt);
