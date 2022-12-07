@@ -3,7 +3,7 @@ import {IUserRepository} from '#core/contracts/repositories/user';
 import {IBaseUseCase} from '#core/contracts/use-cases/base';
 import {User} from '#core/entities/user';
 import {ValidationError} from '#core/errors/validation';
-import {RegisterUserDTO} from '../dtos/user/register-user';
+import {RegisterUserDTO} from '../dtos/user/register';
 
 export class RegisterUserUseCase
   implements IBaseUseCase<RegisterUserDTO, void>
