@@ -1,10 +1,10 @@
 import {ITokenManager} from '#core/contracts/protocols/token-manager';
 import {User} from '#core/entities/user';
-import {TokenManagerJWT} from '#data/protocols/jwt/token-manager';
+import {TokenManagerJWT} from '#data/protocols/token-manager/jwt-token-manager';
 import {userParams} from '?test/mocks/user';
 
 describe(TokenManagerJWT.name, () => {
-  const user = User.create(userParams);
+  const user = User.create({...userParams, id: '2IdydHQVYRfGqdGf3ciQPR3KCL2'});
   const manager: ITokenManager = new TokenManagerJWT();
 
   it('should sign a token', () => {

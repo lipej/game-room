@@ -1,4 +1,4 @@
-import {EncrypterBCrypt} from '#data/protocols/bcrypt/encrypter';
+import {EncrypterBCrypt} from '#data/protocols/encrypter/bcrypt-encrypter';
 
 describe(EncrypterBCrypt.name, () => {
   const protocol = new EncrypterBCrypt();
