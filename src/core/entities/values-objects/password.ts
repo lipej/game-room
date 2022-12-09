@@ -5,7 +5,7 @@ export class Password extends ValueObject {
   private readonly regexValidator =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,20}$/;
 
-  constructor(public readonly value: string, shouldValidate: boolean) {
+  private constructor(public readonly value: string, shouldValidate: boolean) {
     super();
     if (shouldValidate) this.validate();
   }
