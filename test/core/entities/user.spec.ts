@@ -1,17 +1,18 @@
 import {User} from '#core/entities/user';
-import {Email, Username} from '#core/entities/values-objects';
+import {Email, Id, Password, Username} from '#core/entities/values-objects';
 import {userParams} from '?test/mocks/user';
 
 describe(User.name, () => {
-  it('should create an user instace', () => {
-    const user = User.create(userParams);
+  const user = User.create({
+    ...userParams,
+    id: '2IdydHQVYRfGqdGf3ciQPR3KCL2',
+  });
 
+  it('should create an user instace', () => {
     expect(user).toBeInstanceOf(User);
   });
 
   it('should have an username', () => {
-    const user = User.create(userParams);
-
     expect(user).toHaveProperty(
       'username',
       Username.create(userParams.username).value
@@ -19,8 +20,20 @@ describe(User.name, () => {
   });
 
   it('should have an email', () => {
-    const user = User.create(userParams);
-
     expect(user).toHaveProperty('email', Email.create(userParams.email).value);
+  });
+
+  it('should have an password', () => {
+    expect(user).toHaveProperty(
+      'password',
+      Password.create(userParams.password).value
+    );
+  });
+
+  it('should have an id', () => {
+    expect(user).toHaveProperty(
+      'id',
+      Id.create('2IdydHQVYRfGqdGf3ciQPR3KCL2').value
+    );
   });
 });

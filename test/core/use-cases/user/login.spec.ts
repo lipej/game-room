@@ -3,8 +3,8 @@ import {ITokenManager} from '#core/contracts/protocols/token-manager';
 import {IUserRepository} from '#core/contracts/repositories/user';
 import {PasswordValidation} from '#core/errors/password-validation';
 import {LoginUserUseCase} from '#core/use-cases/user/login';
-import {EncrypterBCrypt} from '#data/protocols/bcrypt/encrypter';
-import {TokenManagerJWT} from '#data/protocols/jwt/token-manager';
+import {EncrypterBCrypt} from '#data/protocols/encrypter/bcrypt-encrypter';
+import {TokenManagerJWT} from '#data/protocols/token-manager/jwt-token-manager';
 import {UserRepositoryInMemory} from '#data/repositories/in-memory/user';
 import {userParams} from '?test/mocks/user';
 
@@ -22,6 +22,7 @@ describe(LoginUserUseCase.name, () => {
 
     await repo.create({
       ...userParams,
+      id: '2IdydHQVYRfGqdGf3ciQPR3KCL2',
       password: await encrypter.encrypt(userParams.password),
     });
   });

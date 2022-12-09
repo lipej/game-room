@@ -3,7 +3,7 @@ import {ITokenManager} from '#core/contracts/protocols/token-manager';
 import {IUserRepository} from '#core/contracts/repositories/user';
 import {IBaseUseCase} from '#core/contracts/use-cases/base';
 import {PasswordValidation} from '#core/errors/password-validation';
-import {LoginUserDTO} from '../dtos/user/login';
+import {LoginUserDTO} from './dtos/user/login';
 
 export class LoginUserUseCase implements IBaseUseCase<LoginUserDTO, string> {
   constructor(
