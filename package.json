@@ -12,7 +12,7 @@
     "clean": "rm -rf dist",
     "lint": "gts lint 'src/**/*.ts'",
     "fix": "gts fix 'src/**/*.ts'",
-    "test": "DOTENV_CONFIG_PATH=./.env.test jest --setupFiles dotenv/config",
+    "test": "DOTENV_CONFIG_PATH=./.env.test jest --setupFiles dotenv/config --collectCoverage",
     "test:watch": "pnpm test -- --watch"
   },
   "keywords": [],

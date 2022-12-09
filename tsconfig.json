@@ -8,6 +8,7 @@
       "es2020"
     ],
     "module": "commonjs",
+    "esModuleInterop": true,
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
