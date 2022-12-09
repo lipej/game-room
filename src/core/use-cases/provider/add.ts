@@ -14,9 +14,6 @@ export class AddProviderUseCase implements IBaseUseCase<AddProviderDTO, void> {
 
   perform = async (args: AddProviderDTO): Promise<void> => {
     const user = await this.userRepository.findByEmail(args.userEmail);
-
-    if (!user) throw new Error('TODO');
-
     const providers = await this.providerRepo.listByUserId(user.id);
 
     user.providers = providers;
