@@ -32,8 +32,8 @@ export class Provider {
     return this._nick.value;
   }
 
-  get type() {
-    return this._type.value;
+  get type(): Providers {
+    return this._type.value as Providers;
   }
 
   get isActive() {

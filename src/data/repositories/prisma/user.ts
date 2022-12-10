@@ -2,16 +2,17 @@ import {UserModel} from '#core/contracts/repositories/models/user';
 import {IUserRepository} from '#core/contracts/repositories/user';
 import {User} from '#core/entities/user';
 import {UserNotFound} from '#core/errors/user-not-found';
+import {PrismaClient} from '@prisma/client';
 
-export class UserRepositoryInMemory implements IUserRepository {
-  constructor(private readonly db: UserModel[]) {}
+export class UserRepositoryPrisma implements IUserRepository {
+  constructor(private readonly client: PrismaClient) {}
 
   create = async (user: UserModel): Promise<void> => {
-    this.db.push(user);
+    await this.client.user.create({data: user});
   };
 
   findByEmail = async (email: string): Promise<User> => {
-    const result = this.db.find(user => user.email === email);
+    const result = await this.client.user.findUnique({where: {email}});
 
     if (!result) throw new UserNotFound(email);
 
@@ -22,8 +23,9 @@ export class UserRepositoryInMemory implements IUserRepository {
     email,
     username,
   }: Pick<UserModel, 'email' | 'username'>): Promise<boolean> =>
-    this.db.some(it => it.username === username) ||
-    this.db.some(it => it.email === email);
+    !!(await this.client.user.findFirst({
+      where: {OR: [{email}, {username}]},
+    }));
 
   private toEntity = (user: UserModel): User => User.create(user, false);
 }
