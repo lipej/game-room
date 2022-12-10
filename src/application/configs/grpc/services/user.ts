@@ -26,5 +26,8 @@ const grpcObj = loadPackageDefinition(
 export const userService: GRpcService = {
   service: grpcObj.game_room.core.user.v1.UserService.service,
   implementation: {
+    registerUser: GRpcControllerAdapter.adapt(
+      UserRegisterControllerFactory.create()
+    ),
   },
 };

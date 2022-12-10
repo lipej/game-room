@@ -16,6 +16,9 @@ export class RegisterUserUseCase
   ) {}
 
   perform = async (args: RegisterUserDTO) => {
+    if (await this.userRepo.exists(args))
+      throw new Error('user already exists TODO');
+
     if (args.password !== args.passwordConfirmation)
       throw new ValidationError('password or passwordConfirmation', '#');
 
