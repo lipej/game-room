@@ -13,7 +13,8 @@
     "lint": "gts lint 'src/**/*.ts'",
     "fix": "gts fix 'src/**/*.ts'",
     "test": "DOTENV_CONFIG_PATH=./.env.test jest --setupFiles dotenv/config --collectCoverage",
-    "test:watch": "pnpm test -- --watch"
+    "test:watch": "pnpm test -- --watch",
+    "codegen:buf": "buf generate --template proto/buf.gen.yaml"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +37,8 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.8.0",
+    "@grpc/proto-loader": "^0.7.4",
     "@prisma/client": "^4.7.1",
     "amqplib": "^0.10.3",
     "bcrypt": "^5.1.0",

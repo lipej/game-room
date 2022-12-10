@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package game_room.core.user.v1;
+
+service UserService {
+    rpc RegisterUser(RegisterRequest) returns (RegisterResponse) {}
+}
+
+message RegisterRequest {
+    string email = 1;
+    string username = 2;
+    string password = 3;
+    string passwordConfirmation = 4;
+}
+
+message RegisterResponse {
+    bool success = 1;
+    optional Error error = 3;
+}
+
+message Error {
+    string message = 1;
+    int32 code = 2;
+}
