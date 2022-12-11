@@ -1,4 +1,7 @@
-import {ITokenManager} from '#core/contracts/protocols/token-manager';
+import {
+  DecodedToken,
+  ITokenManager,
+} from '#core/contracts/protocols/token-manager';
 import {User} from '#core/entities/user';
 import * as jwt from 'jsonwebtoken';
 
@@ -13,14 +16,8 @@ export class TokenManagerJWT implements ITokenManager {
       issuer: process.env.JWT_ISSUER,
     });
 
-  verify = (token: string): boolean => {
-    try {
-      jwt.verify(token, this.PRIVATE_KEY);
-      return true;
-    } catch (err) {
-      return false;
-    }
-  };
+  verify = (token: string): DecodedToken =>
+    <DecodedToken>jwt.verify(token, this.PRIVATE_KEY);
 
   private genPayload = (email: string): {email: string} => ({email});
 }
