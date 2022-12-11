@@ -14,12 +14,12 @@ describe(TokenManagerJWT.name, () => {
   it('should return true in verify if token is valid', () => {
     const token = manager.sign(user);
 
-    expect(manager.verify(token)).toBeTruthy();
+    expect(manager.verify(token)).toHaveProperty('email');
   });
 
   it('should return false in verify if token is invalid', () => {
     const token = 'invalid_token';
 
-    expect(manager.verify(token)).toBeFalsy();
+    expect(() => manager.verify(token)).toThrow();
   });
 });
