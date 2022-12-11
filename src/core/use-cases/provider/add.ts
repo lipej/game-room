@@ -18,12 +18,12 @@ export class AddProviderUseCase implements IBaseUseCase<AddProviderDTO, void> {
 
     user.providers = providers;
 
-    // if (user.providers.find(({type}) => type === 'PSN'))
-    //   throw new Error('TODO');
+    if (user.providers.find(({type}) => type === 'PSN'))
+      throw new Error('TODO');
 
-    // const newProvider = Provider.create(args.nick);
+    const newProvider = Provider.create(args.nick);
 
-    // await this.providerRepo.create(user.id, newProvider);
+    await this.providerRepo.create(user.id, newProvider);
 
     await this.notifyProvider.publish(user.id, args.provider);
   };
