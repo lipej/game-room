@@ -35,4 +35,5 @@ model Provider {
   score    Int
 
   @@unique([userId, type])
+  @@unique([type, nick])
 }

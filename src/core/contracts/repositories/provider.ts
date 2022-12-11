@@ -6,4 +6,5 @@ export interface IProviderRepository {
   listByUserId: (userId: string) => Promise<Provider[]>;
   listByType: (type: Providers) => Promise<Provider[]>;
   active: (userId: string, type: Providers) => Promise<void>;
+  exists: (userId: string, type: Providers, nick: string) => Promise<boolean>;
 }

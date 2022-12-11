@@ -34,6 +34,18 @@ export class ProviderRepositoryPrisma implements IProviderRepository {
     return result.map(this.toEntity);
   };
 
+  exists = async (
+    userId: string,
+    type: 'PSN',
+    nick: string
+  ): Promise<boolean> =>
+    !!(await this.client.provider.findUnique({
+      where: {userId_type: {userId, type}},
+    })) ||
+    !!(await this.client.provider.findUnique({
+      where: {type_nick: {type, nick}},
+    }));
+
   private toEntity = (model: ProviderModel) =>
     Provider.create(
       model.nick,
