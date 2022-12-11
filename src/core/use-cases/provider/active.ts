@@ -7,10 +7,8 @@ export class ActiveProviderUseCase
 {
   constructor(private readonly providerRepo: IProviderRepository) {}
   perform = async (args: ActiveProviderDTO): Promise<void> => {
-    const provider = await this.providerRepo.getByType(
-      args.userId,
-      args.provider
-    );
+    const providers = await this.providerRepo.listByUserId(args.userId);
+    const provider = providers.find(it => it.type === args.provider);
 
     if (!provider) throw new Error('TODO');
 

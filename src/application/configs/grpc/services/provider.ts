@@ -6,6 +6,7 @@ import {DEFAULT_PROTO_PATH, LOADER_OPTIONS} from '../shared/constants';
 import {GRpcService} from '../shared/types';
 import {AddProviderControllerFactory} from '#application/factories/provider-add-controller';
 import {AuthMiddlewareFactory} from '#application/factories/auth-middleware';
+import {ActiveProviderControllerFactory} from '#application/factories/provider-active-controller';
 
 const PROTO_PATH = 'game_room/core/provider/v1/provider.proto';
 
@@ -30,6 +31,9 @@ export const providerService: GRpcService = {
     addProvider: GRpcControllerAdapter.adapt(
       AddProviderControllerFactory.create(),
       AuthMiddlewareFactory.create()
+    ),
+    activeProvider: GRpcControllerAdapter.adapt(
+      ActiveProviderControllerFactory.create()
     ),
   },
 };

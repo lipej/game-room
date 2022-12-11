@@ -4,6 +4,7 @@ package game_room.core.provider.v1;
 
 service ProviderService {
     rpc AddProvider(AddProviderRequest) returns (AddProviderResponse) {}
+    rpc ActiveProvider(ActiveProviderRequest) returns (ActiveProviderResponse) {}
 }
 
 message AddProviderRequest {
@@ -16,6 +17,16 @@ message AddProviderResponse {
     bool success = 1;
     optional Error error = 3;
 }
+
+message ActiveProviderRequest {
+   string userId = 1;
+   string provider = 2;
+}
+
+message ActiveProviderResponse {
+    bool success = 1;
+    optional Error error = 3;
+ }
 
 message Error {
     string message = 1;
