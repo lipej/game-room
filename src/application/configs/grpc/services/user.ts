@@ -5,6 +5,7 @@ import {GRpcControllerAdapter} from '../shared/controller-adapter';
 import {DEFAULT_PROTO_PATH, LOADER_OPTIONS} from '../shared/constants';
 import {GRpcService} from '../shared/types';
 import {UserRegisterControllerFactory} from '#application/factories/user-register-controller';
+import {UserLoginControllerFactory} from '#application/factories/user-login-controller';
 
 const PROTO_PATH = 'game_room/core/user/v1/user.proto';
 
@@ -28,6 +29,9 @@ export const userService: GRpcService = {
   implementation: {
     registerUser: GRpcControllerAdapter.adapt(
       UserRegisterControllerFactory.create()
+    ),
+    authenticateUser: GRpcControllerAdapter.adapt(
+      UserLoginControllerFactory.create()
     ),
   },
 };

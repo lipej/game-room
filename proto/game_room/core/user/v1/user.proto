@@ -4,6 +4,7 @@ package game_room.core.user.v1;
 
 service UserService {
     rpc RegisterUser(RegisterRequest) returns (RegisterResponse) {}
+    rpc AuthenticateUser(AuthenticateRequest) returns (AuthenticateResponse) {}
 }
 
 message RegisterRequest {
@@ -11,6 +12,21 @@ message RegisterRequest {
     string username = 2;
     string password = 3;
     string passwordConfirmation = 4;
+}
+
+message AuthenticateRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message AuthData {
+    string token = 1;
+}
+
+message AuthenticateResponse {
+    bool success = 1;
+    optional AuthData data = 2;
+    optional Error error = 3;
 }
 
 message RegisterResponse {
