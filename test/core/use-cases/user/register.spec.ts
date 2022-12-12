@@ -2,6 +2,7 @@ import {IEncrypter} from '#core/contracts/protocols/encrypter';
 import {IIdentityManager} from '#core/contracts/protocols/identity-manager';
 import {IUserRepository} from '#core/contracts/repositories/user';
 import {User} from '#core/entities/user';
+import {DuplicateUserError} from '#core/errors/duplicate-user';
 import {ValidationError} from '#core/errors/validation';
 import {RegisterUserUseCase} from '#core/use-cases/user/register';
 import {EncrypterBCrypt} from '#data/protocols/encrypter/bcrypt-encrypter';
@@ -47,5 +48,19 @@ describe(RegisterUserUseCase.name, () => {
     await expect(promise).rejects.toThrowError(
       new ValidationError('password or passwordConfirmation', '#')
     );
+  });
+
+  it('should not register a user when already has username', async () => {
+    await useCase.perform(userParams);
+    const promise = useCase.perform(userParams);
+
+    await expect(promise).rejects.toThrowError(new DuplicateUserError());
+  });
+
+  it('should not register a user when already has email', async () => {
+    await useCase.perform(userParams);
+    const promise = useCase.perform(userParams);
+
+    await expect(promise).rejects.toThrowError(new DuplicateUserError());
   });
 });

@@ -15,13 +15,13 @@ describe(UserRepositoryInMemory.name, () => {
   });
 
   it('should register a new user', async () => {
-    await repository.create(userParams);
+    await repository.create({...userParams, id: '1'});
 
     expect(db).toHaveLength(1);
   });
 
   it('should find a user', async () => {
-    await repository.create(userParams);
+    await repository.create({...userParams, id: '1'});
 
     const result = await repository.findByEmail(userParams.email);
 
@@ -35,5 +35,13 @@ describe(UserRepositoryInMemory.name, () => {
     await expect(promise).rejects.toThrowError(
       new UserNotFound(userParams.email)
     );
+  });
+
+  it('should return true if already exist', async () => {
+    await repository.create({...userParams, id: '1'});
+
+    const result = await repository.exists(userParams);
+
+    expect(result).toBeTruthy();
   });
 });
