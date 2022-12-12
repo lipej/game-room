@@ -5,9 +5,10 @@
   "main": "dist/main.js",
   "scripts": {
     "dev": "concurrently \"npm run watch-compile\" \"npm run watch-dev\"",
-    "watch-compile": "swc src -w --out-dir dist",
+    "watch-compile": "pnpm copy:proto && swc src -w --out-dir dist",
     "watch-dev": "nodemon --watch \"dist/**/*\" -e js ./dist/main.js",
-    "build": "swc src -d dist",
+    "build": "swc src -d dist && pnpm copy:proto",
+    "copy:proto": "cp -r src/application/configs/grpc/proto dist/application/configs/grpc/proto",
     "start": "NODE_ENV=production node dist/main.js",
     "clean": "rm -rf dist",
     "lint": "gts lint 'src/**/*.ts'",

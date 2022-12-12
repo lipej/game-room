@@ -6,4 +6,4 @@ export const LOADER_OPTIONS = {
   oneofs: true,
 };
 
-export const DEFAULT_PROTO_PATH = '../../../../../proto/';
+export const DEFAULT_PROTO_PATH = '../proto/';
