@@ -17,6 +17,7 @@ export class RegisterUserController extends BaseController<
 
       return {
         success: true,
+        code: 201,
       };
     } catch (err) {
       return {

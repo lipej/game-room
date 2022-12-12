@@ -24,7 +24,22 @@ export class GRpcControllerAdapter {
 
         callback(null, result);
       } catch (err) {
-        callback(null, {success: false, error: <ErrorBase>err});
+        if (err instanceof ErrorBase) {
+          callback(null, {
+            success: false,
+            code: err.code || 500,
+            error: err,
+          });
+          return;
+        }
+
+        callback(null, {
+          success: false,
+          code: 500,
+          error: {
+            message: (err as Error).message,
+          },
+        });
       }
     };
 }

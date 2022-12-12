@@ -1,12 +1,13 @@
 export type ResponseData<K> = {
   success: true;
+  code: number;
   data?: K;
 };
 
 export type ResponseError = {
   success: false;
+  code: number;
   error?: {
-    code: number;
     message: string;
   };
 };

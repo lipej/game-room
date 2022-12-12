@@ -23,6 +23,7 @@ export class LoginUserController extends BaseController<
 
       return {
         success: true,
+        code: 200,
         data: {token},
       };
     } catch (err) {

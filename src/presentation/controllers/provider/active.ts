@@ -17,6 +17,7 @@ export class ActiveProviderController extends BaseController<
 
       return {
         success: true,
+        code: 200,
       };
     } catch (err) {
       return {
