@@ -139,3 +139,15 @@ SERVER_GRPC_PORT=50051
 SERVER_HTTP_PORT=3000
 SERVER_ADDRESS=0.0.0.0
 ```
+
+### Running
+
+To run this project, clone it in your machine
+
+- Go to project folder `cd game-room`
+
+- Instal packages `pnpm install` (if you don't have pnpm in your machine install with `npm i -g pnpm`)
+
+- Copy .env.example to .env and edit values
+
+- Run project with `pnpm dev`
