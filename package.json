@@ -13,7 +13,7 @@
     "clean": "rm -rf dist",
     "lint": "gts lint 'src/**/*.ts'",
     "fix": "gts fix 'src/**/*.ts'",
-    "test": "DOTENV_CONFIG_PATH=./.env.test jest --setupFiles dotenv/config --collectCoverage",
+    "test": "DOTENV_CONFIG_PATH=./.env.test jest --setupFiles dotenv/config --collectCoverage --testLocationInResults",
     "test:watch": "pnpm test -- --watch",
     "codegen:buf": "buf generate --template proto/buf.gen.yaml"
   },
