@@ -3,6 +3,7 @@ import {IProviderRepository} from '#core/contracts/repositories/provider';
 import {IUserRepository} from '#core/contracts/repositories/user';
 import {IBaseUseCase} from '#core/contracts/use-cases/base';
 import {Provider} from '#core/entities/provider';
+import {DuplicateProviderError} from '#core/errors/duplicate-provider';
 import {AddProviderDTO} from './dtos/add';
 
 export class AddProviderUseCase implements IBaseUseCase<AddProviderDTO, void> {
@@ -15,8 +16,11 @@ export class AddProviderUseCase implements IBaseUseCase<AddProviderDTO, void> {
   perform = async (args: AddProviderDTO): Promise<void> => {
     const user = await this.userRepository.findByEmail(args.userEmail);
 
-    if (await this.providerRepo.exists(user.id, args.provider, args.nick))
-      throw new Error('TODO');
+    if (await this.providerRepo.existsForUser(args.provider, user.id))
+      throw new DuplicateProviderError(args.provider);
+
+    if (await this.providerRepo.existsForNick(args.provider, args.nick))
+      throw new DuplicateProviderError(args.provider, args.nick);
 
     const newProvider = Provider.create(args.nick);
 

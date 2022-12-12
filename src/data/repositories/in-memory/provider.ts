@@ -32,16 +32,12 @@ export class ProviderRepositoryInMemory implements IProviderRepository {
     return result.map(this.toEntity);
   };
 
-  exists = async (
-    userId: string,
-    type: 'PSN',
-    nick: string
-  ): Promise<boolean> => {
-    return this.db.some(
-      it =>
-        (it.userId === userId && it.type === type) ||
-        (it.type === type && it.nick === nick)
-    );
+  existsForNick = async (type: 'PSN', nick: string): Promise<boolean> => {
+    return this.db.some(it => it.type === type && it.nick === nick);
+  };
+
+  existsForUser = async (type: 'PSN', userId: string): Promise<boolean> => {
+    return this.db.some(it => it.userId === userId && it.type === type);
   };
 
   private toEntity = (model: ProviderModel) =>

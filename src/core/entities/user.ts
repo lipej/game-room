@@ -44,14 +44,4 @@ export class User {
   get email(): string {
     return this._email.value;
   }
-
-  get providers(): Provider[] {
-    if (!this._providers) throw new Error('TODO');
-
-    return this._providers;
-  }
-
-  set providers(providers: Provider[]) {
-    this._providers = providers;
-  }
 }

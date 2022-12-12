@@ -3,6 +3,7 @@ import {IIdentityManager} from '#core/contracts/protocols/identity-manager';
 import {IUserRepository} from '#core/contracts/repositories/user';
 import {IBaseUseCase} from '#core/contracts/use-cases/base';
 import {User} from '#core/entities/user';
+import {DuplicateUserError} from '#core/errors/duplicate-user';
 import {ValidationError} from '#core/errors/validation';
 import {RegisterUserDTO} from './dtos/user/register';
 
@@ -16,8 +17,7 @@ export class RegisterUserUseCase
   ) {}
 
   perform = async (args: RegisterUserDTO) => {
-    if (await this.userRepo.exists(args))
-      throw new Error('user already exists TODO');
+    if (await this.userRepo.exists(args)) throw new DuplicateUserError();
 
     if (args.password !== args.passwordConfirmation)
       throw new ValidationError('password or passwordConfirmation', '#');
