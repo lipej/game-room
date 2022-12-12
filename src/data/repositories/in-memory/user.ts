@@ -22,7 +22,7 @@ export class UserRepositoryInMemory implements IUserRepository {
     email,
     username,
   }: Pick<UserModel, 'email' | 'username'>): Promise<boolean> =>
-    this.db.some(it => it.username === username) ||
+    this.db.some(it => it.username === username) &&
     this.db.some(it => it.email === email);
 
   private toEntity = (user: UserModel): User => User.create(user, false);
